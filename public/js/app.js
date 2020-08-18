@@ -1,4 +1,3 @@
-
 /**
  * WEATHER CONTROLLER
  */
@@ -8,7 +7,7 @@ const WeatherController = (() => {
 
         fetchAPI: (input, callback) => {
 
-            fetch(`http://localhost:3000/weather?address=${input}`).then(response => {
+            fetch(`/weather?address=${input}`).then(response => {
 
                     return response.json();
                 })
@@ -107,7 +106,7 @@ const UIController = (function() {
             icon = weather.icon;
             temp = `${currentData.temp}°C\n\n`
             description = `${weather.description}\n\n`;
-            detail = `Sunrise: ${sunrise}\nSunset: ${sunset}\nFeel like: ${currentData.feels_like} °C\nHumidity: ${currentData.humidity}%\nUV index: ${currentData.uvi}\nVisibility: ${currentData.visibility} m\nWind speed: ${currentData.wind_speed} m/s\n`;
+            detail = `Sunrise:\t${sunrise}\nSunset:\t\t${sunset}\nFeel like:\t${currentData.feels_like} °C\nHumidity:\t${currentData.humidity}%\nUV index:\t${currentData.uvi}\nVisibility:\t${currentData.visibility} m\nWind speed:\t${currentData.wind_speed} m/s\n`;
 
 
             html = '<div class="list"><div class="left"><pre class="info">%info%</pre><img src="http://openweathermap.org/img/wn/%icon%@2x.png" alt="" class="current-img"><pre class="temp">%temp%</pre><pre class="description">%description%</pre></div><div class="right"><pre class="detail">%detail%</pre></div><div style="clear:both"></div></div>';
@@ -148,27 +147,27 @@ const UIController = (function() {
 
                 icon = `${dailyData[i].weather[0].icon}`;
 
-                temp = `${dailyData[i].temp.day}`;
-
-                description = `${dailyData[i].weather[0].description}`;
+                temp = `${dailyData[i].temp.day}°C`;
 
                 minMax = `min: ${dailyData[i].temp.min}\tmax: ${dailyData[i].temp.max}`;
 
+                description = `${dailyData[i].weather[0].description}\n`;
 
-                detailTemp = `Morn: ${dailyData[i].temp.morn}\tFeel like: ${dailyData[i].feels_like.morn}\nEve: ${dailyData[i].temp.eve} \tFeel like: ${dailyData[i].feels_like.eve}\nNight: ${dailyData[i].temp.night}\tFeel like: ${dailyData[i].feels_like.night}\n`
+
+                detailTemp = `<strong>Detail Temp (°C)\n</strong>Morn:${dailyData[i].temp.morn}\tFeel like: ${dailyData[i].feels_like.morn}\nEve: ${dailyData[i].temp.eve} \tFeel like: ${dailyData[i].feels_like.eve}\nNight: ${dailyData[i].temp.night}\tFeel like: ${dailyData[i].feels_like.night}\n`
 
 
                 sunrise = this.formatDate(dailyData[i].sunrise);
                 sunset = this.formatDate(dailyData[i].sunset);
 
-                detail = `Sunrise: ${sunrise}\nSunset: ${sunset}\nHumidity: ${dailyData[i].humidity}%\nWind speed: ${dailyData[i].wind_speed} m/s\nCloud: ${dailyData[i].clouds} %\nUV Index: ${dailyData[i].uvi}\n`;
+                detail = `Sunrise:\t${sunrise}\nSunset:\t\t${sunset}\nHumidity:\t${dailyData[i].humidity} %\nWind speed:\t${dailyData[i].wind_speed} m/s\nCloud:\t\t${dailyData[i].clouds} %\nUV Index:\t${dailyData[i].uvi}\n`;
 
                 if (dailyData[i].rain) {
-                    detail += `Rain: ${dailyData[i].rain} mm\n`;
+                    detail += `<strong><em>Rain:\t\t${dailyData[i].rain} mm\n</em></strong>`;
                 }
 
                 if (dailyData[i].snow) {
-                    detail += `Snow: ${dailyData[i].snow} mm`;
+                    detail += `<strong><em>Snow:\t\t${dailyData[i].snow} mm</em></strong>`;
                 }
 
                 newHtml = html.replace('%id%', i);
