@@ -109,7 +109,7 @@ const UIController = (function() {
             detail = `Sunrise:\t${sunrise}\nSunset:\t\t${sunset}\nFeel like:\t${currentData.feels_like} °C\nHumidity:\t${currentData.humidity}%\nUV index:\t${currentData.uvi}\nVisibility:\t${currentData.visibility} m\nWind speed:\t${currentData.wind_speed} m/s\n`;
 
 
-            html = '<div class="list"><div class="left"><pre class="info">%info%</pre><img src="http://openweathermap.org/img/wn/%icon%@2x.png" alt="" class="current-img"><pre class="temp">%temp%</pre><pre class="description">%description%</pre></div><div class="right"><pre class="detail">%detail%</pre></div><div style="clear:both"></div></div>';
+            html = '<div class="list"><div class="left"><pre class="info">%info%</pre><img src="https://openweathermap.org/img/wn/%icon%@2x.png" alt="" class="current-img"><pre class="temp">%temp%</pre><pre class="description">%description%</pre></div><div class="right"><pre class="detail">%detail%</pre></div><div style="clear:both"></div></div>';
 
             newHtml = html.replace('%info%', info);
             newHtml = newHtml.replace('%icon%', icon);
@@ -133,7 +133,7 @@ const UIController = (function() {
 
             size = dailyData.length;
 
-            html = '<div id = "%id%" class="daily"><div class="left"><pre class="info">%info%</pre><img src="http://openweathermap.org/img/wn/%icon%@2x.png" alt="" class="current-img"><pre class="temp">%temp%</pre><pre class="min-max">%minMax%</pre><pre class="description">%description%</pre><pre class="detail-temp">%detailTemp%</pre></div><div class="right"><pre class="detail">%detail%</pre></div><div style="clear:both"></div></div>';
+            html = '<div id = "%id%" class="daily"><div class="left"><pre class="info">%info%</pre><img src="https://openweathermap.org/img/wn/%icon%@2x.png" alt="" class="current-img"><pre class="temp">%temp%</pre><pre class="min-max">%minMax%</pre><pre class="description">%description%</pre><pre class="detail-temp">%detailTemp%</pre></div><div class="right"><pre class="detail">%detail%</pre></div><div style="clear:both"></div></div>';
 
 
             document.getElementById(DOMstrings.listDaily).innerHTML = '';
