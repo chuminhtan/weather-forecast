@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tamma+2&family=Roboto&display=swap');
+body {
+    font-family: 'Baloo Tamma 2', cursive;
+    padding: 20px;
+}
+
+h1 {
+    color: gray;
+    margin: 0;
+}
+
+h2 {
+    margin: 50px 0 0 0;
+    color: cornflowerblue;
+}
+
+header,
+.content,
+footer {
+    margin: 10px auto 50px;
+}
+
+header nav {
+    background: gray;
+    display: inline-block;
+}
+
+header a {
+    color: white;
+    margin: 20px 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+header a:hover {
+    text-decoration: underline;
+}
+
+pre {
+    line-height: 30px;
+    font-size: 1rem;
+}
+
+
+/* ==========================================CONTENT================================ */
+
+input,
+button {
+    padding: 10px;
+}
+
+input {
+    width: 70%;
+    border-radius: 5px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    border-radius: 5px;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    opacity: 0.7;
+}
+
+p.error {
+    color: red;
+}
+
+p.loading {
+    color: #4CAF50;
+}
+
+.list,
+.daily {
+    box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: gray;
+    margin: 0 0 30px;
+}
+
+.daily {
+    margin: 10px 0 30px 0;
+}
+
+.left,
+.right {
+    width: 50%;
+}
+
+pre.info,
+pre.description {
+    font-weight: bold;
+    margin: 0;
+}
+
+pre.description {
+    font-size: 20px;
+}
+
+pre.temp {
+    color: #F05514;
+    font-size: 40px;
+    font-weight: bold;
+    margin: 18px 0 0 0;
+}
+
+.current-img {
+    display: block;
+    float: left;
+}
+
+#list-daily {
+    margin-bottom: 100px;
+}
+
+
+/* =========================FOOTER================= */
+
+footer {
+    color: gray;
+}

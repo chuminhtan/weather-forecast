@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Weather App</title>
+</head>
+
+<body>
+    {{>header}}
+    <div class="content">
+        <h2>Find Location</h2>
+        <form>
+            <input type="search" placeholder="Enter Location">
+            <button type="submit">Search</button>
+        </form>
+        <p id="message"></p>
+        <h2 id="titleCurrent">Current</h2>
+        <div id="current">
+        {{!-- <div class="list">
+            <div class="left">
+                <pre class="info"></pre>
+                <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" class="current-img">
+                <pre class="description"></pre>
+            </div>
+            <div class="right">
+                <pre class="detail">
+                </pre>
+            </div>
+        </div> --}}
+        </div>
+        <h2 id="titleDaily">Daily</h2>
+        <div id="list-daily">
+            {{!-- <div id = "" class="daily">
+                <div class="left">
+                    <pre class="info"></pre>
+                    <img src="http://openweathermap.org/img/wn/10d@2x.png" alt="" class="current-img">
+                    <pre class="description"></pre>
+                    <pre class="temp-detail">min : 20 max: 30</pre>
+                </div>
+                <div class="right">
+                    <pre class="detail">
+                </pre>
+                </div>
+                <div style="clear:both"></div>
+            </div> --}}
+        </div>
+    </div>
+    {{>footer}}
+
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
