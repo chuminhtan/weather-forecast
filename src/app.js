@@ -65,7 +65,7 @@ app.get('/weather', (req, res) => {
             });
         }
 
-        forecast(latitude, longitude, (error, { lat, lon, timezone, current, daily }) => {
+        forecast(latitude, longitude, location, (error, { lat, lon, location, current, daily }) => {
 
 
             if (error) {
@@ -77,7 +77,7 @@ app.get('/weather', (req, res) => {
             res.send({
                 lat,
                 lon,
-                timezone,
+                location,
                 current,
                 daily
             })

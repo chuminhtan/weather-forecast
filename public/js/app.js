@@ -93,7 +93,7 @@ const UIController = (function() {
 
         // Add current forecast
 
-        addCurrentForecast: function(timezone = '', currentData = {}) {
+        addCurrentForecast: function(location = '', currentData = {}) {
 
             let html, newHtml, info, icon, description, detail, weather, time, sunrise, sunset, temp;
 
@@ -102,7 +102,7 @@ const UIController = (function() {
             sunset = this.formatDate(currentData.sunset);
 
             weather = currentData.weather[0];
-            info = `${timezone}\n${time}`;
+            info = `${location}\n${time}`;
             icon = weather.icon;
             temp = `${currentData.temp}°C\n\n`
             description = `${weather.description}\n\n`;
@@ -127,7 +127,7 @@ const UIController = (function() {
 
         // Add daily forecast
 
-        addDailyForecast: function(timezone, dailyData) {
+        addDailyForecast: function(location = '', dailyData = {}) {
 
             let html, newHtml, size, info, dateTime, icon, description, temp, minMax, detailTemp, detail, sunrise, sunset;
 
@@ -143,7 +143,7 @@ const UIController = (function() {
 
                 dateTime = this.formatDate(dailyData[i].dt);
 
-                info = `${timezone}\n${dateTime}`;
+                info = `${location}\n${dateTime}`;
 
                 icon = `${dailyData[i].weather[0].icon}`;
 
@@ -248,12 +248,12 @@ const controller = (function(UICtrl, WeatherCtrl) {
 
             // Add current weather
 
-            UICtrl.addCurrentForecast(weatherData.timezone, weatherData.current);
+            UICtrl.addCurrentForecast(weatherData.location, weatherData.current);
 
 
             // Add daily forecast
 
-            UICtrl.addDailyForecast(weatherData.timezone, weatherData.daily);
+            UICtrl.addDailyForecast(weatherData.location, weatherData.daily);
         });
     };
 
