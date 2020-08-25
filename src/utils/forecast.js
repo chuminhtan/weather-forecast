@@ -1,9 +1,9 @@
 const request = require('request');
-const fs = require('fs');
+const keyAPI = process.env.OPEN_WEATHER_MAP_KEY
 
-const forecast = (latitude, longitude, location, callback) => {
-
-    const url = `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&lang=en&appid=246c5e4f723877cd167ed8ad4e8229ee`;
+const forecast = (latitude, longitude, callback) => {
+    
+    const url = `http://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&lang=en&appid=${keyAPI}`
 
     request({ url, json: true }, (error, { body }) => {
 
@@ -12,13 +12,12 @@ const forecast = (latitude, longitude, location, callback) => {
             callback('Unable to connect to weather service!', undefined);
         } else if (body.message) {
 
-            callback('Unable to find location', undefined);
+            callback('Unable to get data weather', undefined);
         } else {
 
             callback(undefined, {
                 lat: body.lat,
                 lon: body.lon,
-                location: location,
                 current: body.current,
                 daily: body.daily
             });

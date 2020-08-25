@@ -1,15 +1,20 @@
 const request = require('request')
+const keyAPI = process.env.OPEN_CAGE_DATA_KEY
 
-const geocode = (address, callback) => {
-    // const url = `http://api.mapbox.com/geocoding/v5/mapbox.places/${address}.json?access_token=pk.eyJ1IjoibXJ0YWFuIiwiYSI6ImNrZG9tcTloMTF0bmIyeW9mN3MyeDEwNGcifQ.ZOSIZEWIDM117d0FDHKQng&limit=1`;
-    const url = `https://api.opencagedata.com/geocode/v1/json?key=d73d247ef47243a3bfd9b9f108043a26&q=${address}&pretty=1`;
+const address = (address, callback) => {
+    
+    const url = `https://api.opencagedata.com/geocode/v1/json?key=${keyAPI}&q=${address}&pretty=1`;
+    
     request({ url, json: true }, (error, { body } = {}) => {
 
         if (error) {
-            callback('Unable connection!', undefined)
-        } else if (body.results.length === 0) {
+            callback(error, undefined)
+
+        } else if (body.results.length === 0) {       
             callback('Unable to find location! Please search other place', undefined)
+
         } else {
+
             callback(undefined, {
                 latitude: body.results[0].geometry.lat,
                 longitude: body.results[0].geometry.lng,
@@ -19,4 +24,29 @@ const geocode = (address, callback) => {
     })
 }
 
-module.exports = geocode
+const coordinate = (latitude, longitude, callback) => {
+    
+    const url = `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${keyAPI}`
+
+    request({ url, json: true }, (error, { body } = {}) => {
+
+        if (error) {
+            callback('Unable connection!', undefined)
+
+        } else if (body.results.length === 0) {
+            console.log(body.results)
+            callback('Unable to find location! Please search other place', undefined)
+
+        } else {
+
+            callback(undefined, {
+                location: body.results[0].formatted
+            })
+        }
+    })
+}
+
+module.exports = {
+    address,
+    coordinate
+}

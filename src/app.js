@@ -5,7 +5,7 @@ const geocode = require('./utils/geocode');
 const forecast = require('./utils/forecast');
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 // Defined path for Express config
 
@@ -13,13 +13,11 @@ const publicDirectoryPath = path.join(__dirname, '../public');
 const viewsPath = path.join(__dirname, '../templates/views');
 const partialsPath = path.join(__dirname, '../templates/partials');
 
-
 // Setup handlebars engine and views location
 
 app.set('view engine', 'hbs');
 app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
-
 
 // Setup static directory to serves
 
@@ -35,7 +33,6 @@ app.get('', (req, res) => {
     });
 });
 
-
 // About page
 
 app.get('/about', (req, res) => {
@@ -46,30 +43,28 @@ app.get('/about', (req, res) => {
 });
 
 
-// Weather page
+// Weather - address
 
-app.get('/weather', (req, res) => {
-
-    if (!req.query.address) {
-
-        return res.send('Error : You must have provide Address');
-    }
+app.get('/weather/address', (req, res) => {
 
     const address = req.query.address;
-    geocode(address, (error, { latitude, longitude, location } = {}) => {
+
+    if (!address) {
+
+        return res.status(400).send('Error : You must have provide Address');
+    }
+
+    geocode.address(address, (error, { latitude, longitude, location } = {}) => {
 
         if (error) {
-
             return res.send({
                 error
             });
         }
 
-        forecast(latitude, longitude, location, (error, { lat, lon, location, current, daily }) => {
-
-
+        forecast(latitude, longitude, (error, { lat, lon, current, daily }) => {
             if (error) {
-                return res.send({
+                return res.status(400).send({
                     error
                 })
             }
@@ -84,6 +79,47 @@ app.get('/weather', (req, res) => {
         })
     })
 });
+
+// Weather - coordinate
+
+app.get('/weather/coord', (req, res) => {
+
+    const latitude = req.query.lat
+    const longitude = req.query.lon
+
+    if (!latitude || !longitude) {
+
+        return res.status(400).send('Error : You must have provide coordinate');
+    }
+
+    geocode.coordinate(latitude, longitude, (error, {location } = {}) => {
+
+        if (error) {
+            return res.status(400).send({
+                error
+            });
+        }
+
+        forecast(latitude, longitude, (error, { current, daily } ={}) => {
+            if (error) {
+                console.log(error);
+                return res.send({
+                    error
+                })
+            }
+
+            res.send({
+                latitude,
+                longitude,
+                location,
+                current,
+                daily
+            })
+        })
+    })
+});
+
+
 
 
 // 404 Page
